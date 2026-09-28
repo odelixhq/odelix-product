@@ -1,0 +1,401 @@
+{
+  "fixture_class": "SYNTHETIC_CONTRACT_FIXTURE",
+  "schema": "../agent.spec.v1.schema.json",
+  "valid": [
+    {
+      "schema_version": 1,
+      "spec_id": "agent:1",
+      "axes": {
+        "interaction": "EVENT",
+        "placement": "HOSTED",
+        "environment": "PAPER",
+        "authority": "SIMULATE",
+        "brain": "MANAGED"
+      },
+      "input_refs": [
+        {
+          "ref_id": "synthetic:dataset:1",
+          "source_id": "SYNTHETIC",
+          "dataset_revision": "1",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "knowledge_time": "2026-09-27T12:00:00Z",
+          "rights_policy_id": "synthetic-only",
+          "access_class": "CENTRAL_REF_ONLY",
+          "available": false
+        }
+      ],
+      "brain_ref": "managed-public-test-procedure",
+      "policy_ref": "sim-policy:1",
+      "budget_ref": "bounded-budget:1",
+      "approval_profile_ref": "auth-ui:ttl",
+      "egress_profile_ref": "allow-synthetic-only",
+      "retention_profile_ref": "test-expiring",
+      "secrets_ref": null,
+      "egress_mode": "GRANTED_EGRESS",
+      "brain_execution": "HOSTED_SERVICE",
+      "private_skill_refs": []
+    },
+    {
+      "schema_version": 1,
+      "spec_id": "agent:1",
+      "axes": {
+        "interaction": "EVENT",
+        "placement": "LOCAL",
+        "environment": "READ_ONLY",
+        "authority": "READ",
+        "brain": "MODEL"
+      },
+      "input_refs": [
+        {
+          "ref_id": "synthetic:dataset:1",
+          "source_id": "SYNTHETIC",
+          "dataset_revision": "1",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "knowledge_time": "2026-09-27T12:00:00Z",
+          "rights_policy_id": "synthetic-only",
+          "access_class": "CENTRAL_REF_ONLY",
+          "available": false
+        }
+      ],
+      "brain_ref": "local:model:synthetic",
+      "policy_ref": "sim-policy:1",
+      "budget_ref": "bounded-budget:1",
+      "approval_profile_ref": "auth-ui:ttl",
+      "egress_profile_ref": "local-no-egress-synthetic",
+      "retention_profile_ref": "test-expiring",
+      "secrets_ref": null,
+      "egress_mode": "NO_EGRESS",
+      "brain_execution": "LOCAL_PROCESS",
+      "private_skill_refs": []
+    }
+  ],
+  "invalid": [
+    {
+      "name": "real environment rejected",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "HOSTED",
+          "environment": "LIVE",
+          "authority": "SIMULATE",
+          "brain": "MANAGED"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "GRANTED_EGRESS",
+        "brain_execution": "HOSTED_SERVICE",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "unknown axis rejected",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "HOSTED",
+          "environment": "PAPER",
+          "authority": "SIMULATE",
+          "brain": "MANAGED",
+          "autonomy": "unbounded"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "GRANTED_EGRESS",
+        "brain_execution": "HOSTED_SERVICE",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "no-egress managed",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "LOCAL",
+          "environment": "READ_ONLY",
+          "authority": "READ",
+          "brain": "MANAGED"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "LOCAL_PROCESS",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "no-egress external",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "LOCAL",
+          "environment": "READ_ONLY",
+          "authority": "READ",
+          "brain": "EXTERNAL"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "LOCAL_PROCESS",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "no-egress remote BYOK",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "LOCAL",
+          "environment": "READ_ONLY",
+          "authority": "READ",
+          "brain": "BYOK"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "EXTERNAL_SERVICE",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "local private Skill",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "LOCAL",
+          "environment": "READ_ONLY",
+          "authority": "READ",
+          "brain": "MODEL"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "LOCAL_PROCESS",
+        "private_skill_refs": [
+          "private:secret-skill"
+        ]
+      }
+    },
+    {
+      "name": "hybrid is not executor axis",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "HYBRID",
+          "environment": "READ_ONLY",
+          "authority": "READ",
+          "brain": "MODEL"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "LOCAL_PROCESS",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "user mutation is not agent ambient authority",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "LOCAL",
+          "environment": "READ_ONLY",
+          "authority": "USER_MUTATION",
+          "brain": "MODEL"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "LOCAL_PROCESS",
+        "private_skill_refs": []
+      }
+    },
+    {
+      "name": "simulate readonly environment",
+      "data": {
+        "schema_version": 1,
+        "spec_id": "agent:1",
+        "axes": {
+          "interaction": "EVENT",
+          "placement": "LOCAL",
+          "environment": "READ_ONLY",
+          "authority": "SIMULATE",
+          "brain": "MODEL"
+        },
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "brain_ref": "managed-public-test-procedure",
+        "policy_ref": "sim-policy:1",
+        "budget_ref": "bounded-budget:1",
+        "approval_profile_ref": "auth-ui:ttl",
+        "egress_profile_ref": "allow-synthetic-only",
+        "retention_profile_ref": "test-expiring",
+        "secrets_ref": null,
+        "egress_mode": "NO_EGRESS",
+        "brain_execution": "LOCAL_PROCESS",
+        "private_skill_refs": []
+      }
+    }
+  ]
+}

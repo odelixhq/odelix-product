@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.odelix.invalid/draft/node.heartbeat.v1",
+  "title": "node.heartbeat.v1",
+  "description": "DRAFT unpublished Odelix contract. JSON validation alone does not prove authorisation, chronology, signatures or runtime behaviour.",
+  "x-release": "r15.11",
+  "x-status": "DRAFT_UNPUBLISHED",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "node_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "environment": {
+      "const": "PAPER"
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "state": {
+      "enum": [
+        "STARTING",
+        "RUNNING",
+        "PAUSED",
+        "STOPPING",
+        "STOPPED",
+        "UNREACHABLE",
+        "UNKNOWN"
+      ]
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "stop_result": {
+      "enum": [
+        "NONE",
+        "REQUESTED",
+        "ATTEMPTED",
+        "CONFIRMED",
+        "UNKNOWN"
+      ]
+    },
+    "health_profile_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "schema_version",
+    "node_id",
+    "environment",
+    "manifest_sha256",
+    "observed_at",
+    "received_at",
+    "state",
+    "sequence",
+    "stop_result",
+    "health_profile_ref"
+  ],
+  "additionalProperties": false
+}

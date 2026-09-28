@@ -1,0 +1,82 @@
+{
+  "fixture_class": "SYNTHETIC_CONTRACT_FIXTURE",
+  "schema": "../agent.manifest.v1.schema.json",
+  "valid": [
+    {
+      "schema_version": 1,
+      "manifest_id": "manifest:1",
+      "spec_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "policy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "software_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "dataset_refs": [
+        {
+          "ref_id": "synthetic:dataset:1",
+          "source_id": "SYNTHETIC",
+          "dataset_revision": "1",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "knowledge_time": "2026-09-27T12:00:00Z",
+          "rights_policy_id": "synthetic-only",
+          "access_class": "CENTRAL_REF_ONLY",
+          "available": false
+        }
+      ],
+      "environment": "PAPER",
+      "resolved_at": "2026-09-27T12:00:00Z",
+      "approval_target_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "approval_state": "PENDING"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "bad digest",
+      "data": {
+        "schema_version": 1,
+        "manifest_id": "manifest:1",
+        "spec_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "policy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "software_sha256": "latest",
+        "dataset_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "environment": "PAPER",
+        "resolved_at": "2026-09-27T12:00:00Z",
+        "approval_target_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "approval_state": "PENDING"
+      }
+    },
+    {
+      "name": "missing approval target",
+      "data": {
+        "schema_version": 1,
+        "manifest_id": "manifest:1",
+        "spec_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "policy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "software_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dataset_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "environment": "PAPER",
+        "resolved_at": "2026-09-27T12:00:00Z",
+        "approval_state": "PENDING"
+      }
+    }
+  ]
+}

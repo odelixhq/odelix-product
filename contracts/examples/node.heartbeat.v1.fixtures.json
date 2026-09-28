@@ -1,0 +1,54 @@
+{
+  "fixture_class": "SYNTHETIC_CONTRACT_FIXTURE",
+  "schema": "../node.heartbeat.v1.schema.json",
+  "valid": [
+    {
+      "schema_version": 1,
+      "node_id": "node:synthetic:1",
+      "environment": "PAPER",
+      "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "observed_at": "2026-09-27T12:00:00Z",
+      "received_at": "2026-09-27T12:00:00Z",
+      "state": "UNREACHABLE",
+      "sequence": 2,
+      "stop_result": "UNKNOWN",
+      "health_profile_ref": "sim-health-v1"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "negative sequence",
+      "data": {
+        "schema_version": 1,
+        "node_id": "node:synthetic:1",
+        "environment": "PAPER",
+        "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "observed_at": "2026-09-27T12:00:00Z",
+        "received_at": "2026-09-27T12:00:00Z",
+        "state": "UNREACHABLE",
+        "sequence": -1,
+        "stop_result": "UNKNOWN",
+        "health_profile_ref": "sim-health-v1"
+      }
+    },
+    {
+      "name": "payload egress rejected",
+      "data": {
+        "schema_version": 1,
+        "node_id": "node:synthetic:1",
+        "environment": "PAPER",
+        "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "observed_at": "2026-09-27T12:00:00Z",
+        "received_at": "2026-09-27T12:00:00Z",
+        "state": "UNREACHABLE",
+        "sequence": 2,
+        "stop_result": "UNKNOWN",
+        "health_profile_ref": "sim-health-v1",
+        "raw_prices": [
+          1,
+          2
+        ]
+      }
+    }
+  ]
+}

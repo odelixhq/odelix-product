@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.odelix.invalid/draft/model.signal.v1",
+  "title": "model.signal.v1",
+  "description": "DRAFT unpublished Odelix contract. JSON validation alone does not prove authorisation, chronology, signatures or runtime behaviour.",
+  "x-release": "r15.11",
+  "x-status": "DRAFT_UNPUBLISHED",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "status": {
+      "enum": [
+        "VALID",
+        "VALID_NEUTRAL",
+        "ABSTAIN",
+        "MISSING",
+        "INSUFFICIENT_DATA"
+      ]
+    },
+    "model_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "method_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "known_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "dataset_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "content_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "knowledge_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rights_policy_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "access_class": {
+            "enum": [
+              "LOCAL_ONLY",
+              "CENTRAL_REF_ONLY",
+              "AUTHORIZED_CONTENT"
+            ]
+          },
+          "available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ref_id",
+          "source_id",
+          "dataset_revision",
+          "content_sha256",
+          "knowledge_time",
+          "rights_policy_id",
+          "access_class",
+          "available"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 10000
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number"
+            },
+            "units": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            }
+          },
+          "required": [
+            "value",
+            "units"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "model_ref",
+    "method_ref",
+    "as_of",
+    "known_at",
+    "input_refs",
+    "value",
+    "reason"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "ABSTAIN",
+              "MISSING",
+              "INSUFFICIENT_DATA"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "VALID",
+              "VALID_NEUTRAL"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "units": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              }
+            },
+            "required": [
+              "value",
+              "units"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}

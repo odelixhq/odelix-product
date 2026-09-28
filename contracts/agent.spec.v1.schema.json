@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.odelix.invalid/draft/agent.spec.v1",
+  "title": "agent.spec.v1",
+  "description": "DRAFT unpublished Odelix contract. JSON validation alone does not prove authorisation, chronology, signatures or runtime behaviour.",
+  "x-release": "r15.11",
+  "x-status": "DRAFT_UNPUBLISHED",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "spec_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "axes": {
+      "type": "object",
+      "properties": {
+        "interaction": {
+          "enum": [
+            "INTERACTIVE",
+            "SCHEDULED",
+            "EVENT"
+          ]
+        },
+        "placement": {
+          "enum": [
+            "HOSTED",
+            "LOCAL",
+            "EMBEDDED"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "READ_ONLY",
+            "REPLAY",
+            "PAPER"
+          ]
+        },
+        "authority": {
+          "enum": [
+            "READ",
+            "DRAFT",
+            "SIMULATE"
+          ]
+        },
+        "brain": {
+          "enum": [
+            "DETERMINISTIC",
+            "MODEL",
+            "MANAGED",
+            "BYOK",
+            "EXTERNAL"
+          ]
+        }
+      },
+      "required": [
+        "interaction",
+        "placement",
+        "environment",
+        "authority",
+        "brain"
+      ],
+      "additionalProperties": false
+    },
+    "input_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "dataset_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "content_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "knowledge_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rights_policy_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "access_class": {
+            "enum": [
+              "LOCAL_ONLY",
+              "CENTRAL_REF_ONLY",
+              "AUTHORIZED_CONTENT"
+            ]
+          },
+          "available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ref_id",
+          "source_id",
+          "dataset_revision",
+          "content_sha256",
+          "knowledge_time",
+          "rights_policy_id",
+          "access_class",
+          "available"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 10000
+    },
+    "brain_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "policy_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "budget_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "approval_profile_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "egress_profile_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "retention_profile_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "secrets_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "egress_mode": {
+      "enum": [
+        "NO_EGRESS",
+        "GRANTED_EGRESS"
+      ],
+      "description": "NO_EGRESS means inputs stay inside declared local executor perimeter; resolved network destinations are checked by policy."
+    },
+    "brain_execution": {
+      "enum": [
+        "LOCAL_PROCESS",
+        "HOSTED_SERVICE",
+        "EXTERNAL_SERVICE"
+      ]
+    },
+    "private_skill_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 100,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "spec_id",
+    "axes",
+    "input_refs",
+    "brain_ref",
+    "policy_ref",
+    "budget_ref",
+    "approval_profile_ref",
+    "egress_profile_ref",
+    "retention_profile_ref",
+    "secrets_ref",
+    "egress_mode",
+    "brain_execution",
+    "private_skill_refs"
+  ],
+  "additionalProperties": false,
+  "x-draft-revision": 2,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "egress_mode": {
+            "const": "NO_EGRESS"
+          }
+        },
+        "required": [
+          "egress_mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "axes": {
+            "properties": {
+              "brain": {
+                "not": {
+                  "enum": [
+                    "MANAGED",
+                    "EXTERNAL"
+                  ]
+                }
+              },
+              "placement": {
+                "enum": [
+                  "LOCAL",
+                  "EMBEDDED"
+                ]
+              }
+            }
+          },
+          "brain_execution": {
+            "const": "LOCAL_PROCESS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "axes": {
+            "properties": {
+              "placement": {
+                "enum": [
+                  "LOCAL",
+                  "EMBEDDED"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "private_skill_refs": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "axes": {
+            "properties": {
+              "brain": {
+                "const": "MANAGED"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "axes": {
+            "properties": {
+              "authority": {
+                "enum": [
+                  "READ",
+                  "DRAFT",
+                  "SIMULATE"
+                ]
+              },
+              "placement": {
+                "const": "HOSTED"
+              }
+            }
+          },
+          "brain_execution": {
+            "const": "HOSTED_SERVICE"
+          },
+          "egress_mode": {
+            "const": "GRANTED_EGRESS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "axes": {
+            "properties": {
+              "authority": {
+                "const": "SIMULATE"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "axes": {
+            "properties": {
+              "environment": {
+                "enum": [
+                  "REPLAY",
+                  "PAPER"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "x-runtime-policy-required": [
+    "resolve brain endpoints and egress_profile_ref",
+    "private Skill classification from registry not user assertions",
+    "consent/identity/signature/expiry",
+    "Proposal/Plan is not authorization"
+  ]
+}

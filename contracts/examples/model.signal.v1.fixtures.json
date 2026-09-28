@@ -1,0 +1,83 @@
+{
+  "fixture_class": "SYNTHETIC_CONTRACT_FIXTURE",
+  "schema": "../model.signal.v1.schema.json",
+  "valid": [
+    {
+      "schema_version": 1,
+      "status": "MISSING",
+      "model_ref": "test:model",
+      "method_ref": "synthetic",
+      "as_of": "2026-09-27T12:00:00Z",
+      "known_at": "2026-09-27T12:00:00Z",
+      "input_refs": [
+        {
+          "ref_id": "synthetic:dataset:1",
+          "source_id": "SYNTHETIC",
+          "dataset_revision": "1",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "knowledge_time": "2026-09-27T12:00:00Z",
+          "rights_policy_id": "synthetic-only",
+          "access_class": "CENTRAL_REF_ONLY",
+          "available": false
+        }
+      ],
+      "value": null,
+      "reason": "no permitted observations"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "false neutral default",
+      "data": {
+        "schema_version": 1,
+        "status": "MISSING",
+        "model_ref": "test:model",
+        "method_ref": "synthetic",
+        "as_of": "2026-09-27T12:00:00Z",
+        "known_at": "2026-09-27T12:00:00Z",
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "value": {
+          "value": 0,
+          "units": "score"
+        },
+        "reason": "no permitted observations"
+      }
+    },
+    {
+      "name": "unknown status",
+      "data": {
+        "schema_version": 1,
+        "status": "BUY",
+        "model_ref": "test:model",
+        "method_ref": "synthetic",
+        "as_of": "2026-09-27T12:00:00Z",
+        "known_at": "2026-09-27T12:00:00Z",
+        "input_refs": [
+          {
+            "ref_id": "synthetic:dataset:1",
+            "source_id": "SYNTHETIC",
+            "dataset_revision": "1",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "knowledge_time": "2026-09-27T12:00:00Z",
+            "rights_policy_id": "synthetic-only",
+            "access_class": "CENTRAL_REF_ONLY",
+            "available": false
+          }
+        ],
+        "value": null,
+        "reason": "no permitted observations"
+      }
+    }
+  ]
+}

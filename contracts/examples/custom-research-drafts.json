@@ -1,0 +1,94 @@
+{
+  "schema_status": "DRAFT_EXAMPLE_NOT_PUBLISHED",
+  "purpose": "DOCUMENTATION_FIXTURES_ONLY",
+  "built_in_strategy": false,
+  "live_authorized": false,
+  "profitability_status": "NOT_ESTABLISHED",
+  "dataset_class": "SYNTHETIC_PLACEHOLDERS_NOT_MARKET_DATA",
+  "cases": [
+    {
+      "id": "relationship-only",
+      "kind": "RELATIONSHIP_STUDY",
+      "state": "SPEC_DRAFT",
+      "inputs": [
+        "SERIES_A",
+        "SERIES_B"
+      ],
+      "target": "OUTCOME_Y",
+      "transforms": [
+        "lag",
+        "rolling_normalization"
+      ],
+      "unresolved_parameters": [
+        "source_versions",
+        "lookback",
+        "lag",
+        "target_horizon",
+        "available_time_policy"
+      ],
+      "position_required": false,
+      "strategy_required": false
+    },
+    {
+      "id": "independent-entry-exit",
+      "kind": "STRATEGY_RULE_DRAFT",
+      "state": "SPEC_DRAFT",
+      "inputs": [
+        "SERIES_A",
+        "SERIES_B",
+        "SERIES_C"
+      ],
+      "entry": {
+        "feature_refs": [
+          "SERIES_A",
+          "SERIES_B"
+        ],
+        "predicate": "user_defined",
+        "threshold": null
+      },
+      "exit": {
+        "feature_refs": [
+          "SERIES_C"
+        ],
+        "predicate": "user_defined_independent_exit",
+        "holding_limit": null
+      },
+      "unresolved_parameters": [
+        "source_versions",
+        "entry_rule",
+        "exit_rule",
+        "decision_clock",
+        "conflict_priority",
+        "execution_model"
+      ],
+      "live_authorized": false
+    },
+    {
+      "id": "variant-comparison",
+      "kind": "EXPERIMENT_DRAFT",
+      "state": "SPEC_DRAFT",
+      "variants": [
+        {
+          "id": "base",
+          "changed_dimension": null
+        },
+        {
+          "id": "exit-variant",
+          "changed_dimension": "exit_rule"
+        },
+        {
+          "id": "source-variant",
+          "changed_dimension": "input_source"
+        }
+      ],
+      "unresolved_parameters": [
+        "data_manifest",
+        "split_policy",
+        "metrics",
+        "search_budget"
+      ],
+      "all_trials_retained": true,
+      "profit_required_for_acceptance": false
+    }
+  ]
+}

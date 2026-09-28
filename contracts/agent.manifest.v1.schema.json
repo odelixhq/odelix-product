@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.odelix.invalid/draft/agent.manifest.v1",
+  "title": "agent.manifest.v1",
+  "description": "DRAFT unpublished Odelix contract. JSON validation alone does not prove authorisation, chronology, signatures or runtime behaviour.",
+  "x-release": "r15.11",
+  "x-status": "DRAFT_UNPUBLISHED",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "spec_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "policy_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "software_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dataset_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "dataset_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "content_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "knowledge_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rights_policy_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "access_class": {
+            "enum": [
+              "LOCAL_ONLY",
+              "CENTRAL_REF_ONLY",
+              "AUTHORIZED_CONTENT"
+            ]
+          },
+          "available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ref_id",
+          "source_id",
+          "dataset_revision",
+          "content_sha256",
+          "knowledge_time",
+          "rights_policy_id",
+          "access_class",
+          "available"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 10000
+    },
+    "environment": {
+      "enum": [
+        "READ_ONLY",
+        "REPLAY",
+        "PAPER"
+      ]
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approval_target_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "approval_state": {
+      "enum": [
+        "PENDING",
+        "APPROVED",
+        "REVOKED",
+        "EXPIRED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "spec_sha256",
+    "policy_sha256",
+    "software_sha256",
+    "dataset_refs",
+    "environment",
+    "resolved_at",
+    "approval_target_sha256",
+    "approval_state"
+  ],
+  "additionalProperties": false
+}
